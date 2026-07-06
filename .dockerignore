@@ -1,0 +1,22 @@
+# Version Management
+.git/
+.gitignore
+.gitmodules
+
+# Compiled Files
+dist/
+
+# Node Files
+node_modules/
+
+# Environment
+environment/
+
+# Markdown Files
+*.md
+
+# Taskfile
+Taskfile.yaml
+
+# MacOS System Files
+.DS_Store

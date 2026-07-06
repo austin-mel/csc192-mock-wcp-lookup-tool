@@ -1,0 +1,7 @@
+!**/*.vue
+!**/*.html
+
+# Ignore
+tsconfig.*
+tailwind.config.js
+vite.config.js

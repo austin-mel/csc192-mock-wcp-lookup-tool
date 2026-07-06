@@ -1,0 +1,26 @@
+version: "3"
+
+vars:
+    PACKAGE_MANAGER: pnpm
+    FORMATTER: prettier
+
+dotenv: ["./environment/.front-end.env"]
+
+tasks:
+    dependencies:
+        cmds:
+            - "{{ .PACKAGE_MANAGER }} install"
+
+    run:
+        deps: [dependencies]
+        cmds:
+            - "{{ .PACKAGE_MANAGER }} run dev"
+
+    test:
+        deps: [dependencies]
+        cmds:
+            - "{{ .PACKAGE_MANAGER }} run test"
+
+    format:
+        cmds:
+            - "{{ .FORMATTER }} --write ."
