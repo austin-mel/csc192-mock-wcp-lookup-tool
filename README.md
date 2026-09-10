@@ -1,47 +1,94 @@
 # Atlas Demo Dashboard
 
-Atlas Demo Dashboard is a standalone Vue and TypeScript portfolio demo for an internal account-management dashboard. It uses only synthetic seed data and local mock services. No client name, customer record, credential, backend endpoint, map key, screenshot, or operational detail from the original private project is required to run or understand this version.
+Atlas Demo Dashboard is the public app name for this repository. The repository may be named `csc192-mock-wcp-lookup-tool` because the codebase began as a mock WCP lookup tool, but the package and running Vue app now use the sanitized portfolio name `atlas-demo-dashboard`.
 
-## Demo Scope
+In this public version, "WCP lookup tool" describes the original dashboard concept: a representative can look up account records, review territory details, and open account-level notes. "Atlas Demo Dashboard" is the cleaned-up demo version of that concept. It is not connected to any production WCP system.
 
-- Search, filter, sort, and paginate fictional account records.
-- View synthetic account locations on a local non-API demo map.
-- Open account detail cards with fake contacts, revenue summaries, and notes.
-- Use a simulated login flow with route guards and logout behavior.
-- View a demo profile generated from local seed data.
+## What This Is
+
+This is a sanitized Vue 3 and TypeScript portfolio demo. It uses synthetic account data from `src/data/demo-data.ts` and local mock service methods from `src/services/demo-data.service.ts`. There are no real client records, customer records, credentials, API keys, backend endpoints, or map provider keys in the app.
+
+## Feature Overview
+
+- Sign in with a local demo account and route through protected dashboard pages.
+- Search fictional accounts by name.
+- Sort accounts by name or calculated distance.
+- Filter account lists by region, recent purchase activity, and whether suspended accounts should be shown.
+- View account status, address, monthly revenue, yearly revenue, and estimated distance.
+- Open a synthetic account detail card with contact information, revenue badges, notes, call links, and demo-only directions.
+- View account locations on a local demo map with synthetic coordinates.
+- Review a demo user profile with assigned region, hire date, contact details, and assigned account count.
 - Toggle light and dark mode.
 
-## Demo Credentials
+## Local Setup
+
+The repository includes `pnpm-lock.yaml`, so the commands below assume `pnpm`.
+
+```bash
+pnpm install
+pnpm dev
+```
+
+The development server is started by Vite. Use the local URL printed by the command output.
+
+No environment secrets are required. `environment/.example.front-end.env` contains only:
+
+```bash
+VITE_DEMO_MODE=true
+```
+
+The app currently runs from local synthetic seed data without a real backend.
+
+## Login
+
+Use the built-in demo credentials:
 
 ```text
 Email: demo.manager@example.com
 Password: portfolio-demo
 ```
 
-Authentication is simulated for portfolio demonstration only. The session token is generated locally, stored under a demo-specific browser storage key, and is not connected to a real identity provider or backend.
+Authentication is simulated locally. A demo token is generated in the browser and stored under the `portfolio_demo_session` local storage key. It is not issued by a real identity provider.
 
-## Data Notice
+## Scripts
 
-All accounts, users, phone numbers, email addresses, sales figures, comments, territory labels, and coordinates are fictional. The dataset was created for this public demo and should not be treated as anonymized production data.
+```bash
+pnpm dev
+pnpm test
+pnpm build
+pnpm preview
+pnpm format
+```
+
+- `pnpm dev` starts the Vite development server.
+- `pnpm test` runs the Vitest test suite.
+- `pnpm build` runs TypeScript checking with `vue-tsc` and creates a production build with Vite.
+- `pnpm preview` serves the built app locally after `pnpm build`.
+- `pnpm format` formats the repository with Prettier.
 
 ## Local Data Architecture
 
-- `src/data/demo-data.ts` contains the synthetic seed records and demo auth helper.
-- `src/services/demo-data.service.ts` exposes local service-style methods for auth, accounts, comments, and geolocation.
-- Network-backed `/api/*` calls were removed for the public portfolio demo.
-- The map is a local visualization component and does not require a map API key.
+- `src/data/demo-data.ts` holds the demo user, demo credentials, synthetic account records, geolocation, and notes.
+- `src/services/demo-data.service.ts` provides local mock methods for login, account lookup, comments, and geolocation.
+- `src/services/auth.service.ts`, `src/services/comment.service.ts`, and `src/services/geolocation.service.ts` call the local demo service layer.
+- Dashboard state is handled in Vue components and providers under `src/components/Dashboard`.
+- The account detail card and comment interactions are local demo interactions only.
 
-## Portfolio Safety Checklist
+## Glossary
 
-Before publishing, confirm:
+- WCP: Legacy shorthand from the original lookup-tool concept. This public repo does not define or connect to a real WCP platform.
+- Atlas: The public portfolio name for the sanitized dashboard demo.
+- Account: A fictional organization record shown in the dashboard. The code also uses customer and client labels in places inherited from the original app.
+- Customer/client: Alternate labels for the same synthetic account records.
+- Territory/region: A fictional assignment area such as Northwest, Coastal, Southwest, or Central.
+- Sales rep: The fictional representative assigned to a territory or account.
+- Suspended status: A demo account state used to show inactive or paused accounts. It is only sample data.
+- Last purchased: A filter based on synthetic month-to-date and year-to-date sales values.
+- MTD/YTD revenue: Demo month-to-date and year-to-date sales totals.
+- Demo map: A local visualization of synthetic account coordinates. It does not call a map API.
 
-- No client names, logos, screenshots, or social links remain.
-- No real customer, contact, account, territory, location, or revenue data remains.
-- No real credentials, tokens, API URLs, API keys, hostnames, or environment secrets remain.
-- No private backend endpoint documentation remains.
-- No original screenshots or image assets from the private project remain.
-- The public repository does not include private commit history or deleted confidential files.
+## Privacy And Sanitization
 
-## Development Notes
+This repository is designed for public portfolio review. All account names, people, addresses, phone numbers, email addresses, sales totals, comments, territory labels, and coordinates are synthetic.
 
-The original implementation patterns are intentionally preserved where they help demonstrate front-end engineering: Vue 3 Composition API, Pinia, Vue Router, typed DTOs, reusable filters, local services, and component-level dashboard interactions.
+No real client or customer data is included. No production credentials, tokens, backend URLs, map keys, screenshots, logos, or operational details are required to run or understand this demo. The local mock services intentionally replace any private API integration that may have existed in the original project context.
