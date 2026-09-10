@@ -1,19 +1,19 @@
 # Atlas Demo Dashboard
 
-Atlas Demo Dashboard is the public app name for this repository. The repository may be named `csc192-mock-wcp-lookup-tool` because the codebase began as a mock WCP lookup tool, but the package and running Vue app now use the sanitized portfolio name `atlas-demo-dashboard`.
+Atlas Demo Dashboard is the public app name for this repository. The repository name `csc192-mock-wcp-lookup-tool` comes from the app's earlier role as a mock WCP lookup tool, while the package and Vue app now use the sanitized portfolio name `atlas-demo-dashboard`.
 
 In this public version, "WCP lookup tool" describes the original dashboard concept: a representative can look up account records, review territory details, and open account-level notes. "Atlas Demo Dashboard" is the cleaned-up demo version of that concept. It is not connected to any production WCP system.
 
 ## What This Is
 
-This is a sanitized Vue 3 and TypeScript portfolio demo. It uses synthetic account data from `src/data/demo-data.ts` and local mock service methods from `src/services/demo-data.service.ts`. There are no real client records, customer records, credentials, API keys, backend endpoints, or map provider keys in the app.
+This is a sanitized Vue 3 and TypeScript portfolio demo. It uses synthetic account data from `src/data/demo-data.ts` and local mock service methods from `src/services/demo-data.service.ts`. The app does not include real client records, customer records, credentials, API keys, backend endpoints, or map provider keys.
 
 ## Feature Overview
 
 - Sign in with a local demo account and route through protected dashboard pages.
 - Search fictional accounts by name.
 - Sort accounts by name or calculated distance.
-- Filter account lists by region, recent purchase activity, and whether suspended accounts should be shown.
+- Filter account lists by region, recent purchase activity, and suspended account visibility.
 - View account status, address, monthly revenue, yearly revenue, and estimated distance.
 - Open a synthetic account detail card with contact information, revenue badges, notes, call links, and demo-only directions.
 - View account locations on a local demo map with synthetic coordinates.
@@ -29,9 +29,9 @@ pnpm install
 pnpm dev
 ```
 
-The development server is started by Vite. Use the local URL printed by the command output.
+Vite starts the development server and prints the local URL.
 
-No environment secrets are required. `environment/.example.front-end.env` contains only:
+The demo needs no environment secrets. `environment/.example.front-end.env` contains only:
 
 ```bash
 VITE_DEMO_MODE=true
@@ -48,7 +48,7 @@ Email: demo.manager@example.com
 Password: portfolio-demo
 ```
 
-Authentication is simulated locally. A demo token is generated in the browser and stored under the `portfolio_demo_session` local storage key. It is not issued by a real identity provider.
+The login flow runs locally. The browser creates a demo token and stores it under the `portfolio_demo_session` local storage key. No real identity provider issues or validates the token.
 
 ## Scripts
 
@@ -71,7 +71,7 @@ pnpm format
 - `src/data/demo-data.ts` holds the demo user, demo credentials, synthetic account records, geolocation, and notes.
 - `src/services/demo-data.service.ts` provides local mock methods for login, account lookup, comments, and geolocation.
 - `src/services/auth.service.ts`, `src/services/comment.service.ts`, and `src/services/geolocation.service.ts` call the local demo service layer.
-- Dashboard state is handled in Vue components and providers under `src/components/Dashboard`.
+- Vue components and providers under `src/components/Dashboard` manage dashboard state.
 - The account detail card and comment interactions are local demo interactions only.
 
 ## Glossary
@@ -89,6 +89,6 @@ pnpm format
 
 ## Privacy And Sanitization
 
-This repository is designed for public portfolio review. All account names, people, addresses, phone numbers, email addresses, sales totals, comments, territory labels, and coordinates are synthetic.
+All account names, people, addresses, phone numbers, email addresses, sales totals, comments, territory labels, and coordinates are synthetic.
 
-No real client or customer data is included. No production credentials, tokens, backend URLs, map keys, screenshots, logos, or operational details are required to run or understand this demo. The local mock services intentionally replace any private API integration that may have existed in the original project context.
+The app includes no real client or customer data. It also includes no production credentials, tokens, backend URLs, map keys, screenshots, logos, or operational details. Local mock services provide the demo behavior instead of private API integrations.
