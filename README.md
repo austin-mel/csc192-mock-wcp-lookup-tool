@@ -1,94 +1,156 @@
 # Atlas Demo Dashboard
 
-Atlas Demo Dashboard is the public app name for this repository. The repository name `csc192-mock-wcp-lookup-tool` comes from the app's earlier role as a mock WCP lookup tool, while the package and Vue app now use the sanitized portfolio name `atlas-demo-dashboard`.
+## Table of Contents
 
-In this public version, "WCP lookup tool" describes the original dashboard concept: a representative can look up account records, review territory details, and open account-level notes. "Atlas Demo Dashboard" is the cleaned-up demo version of that concept. It is not connected to any production WCP system.
+- [Project Summary](#project-summary)
+- [Technologies Used](#technologies-used)
+- [Necessary Tools](#necessary-tools)
+- [Application Setup](#application-setup)
+    - [Set Up the Development Environment](#set-up-the-development-environment)
+    - [Front-end Setup](#front-end-setup)
+    - [Verify the Setup](#verify-the-setup)
+- [Demo credentials](#demo-credentials)
+- [Demo walkthrough](#demo-walkthrough)
+- [Development commands](#development-commands)
+- [Data and privacy](#data-and-privacy)
+- [Documentation](#documentation)
+    - [Developer references](#developer-references)
+    - [Key terms](#key-terms)
 
-## What This Is
+## Project Summary
 
-This is a sanitized Vue 3 and TypeScript portfolio demo. It uses synthetic account data from `src/data/demo-data.ts` and local mock service methods from `src/services/demo-data.service.ts`. The app does not include real client records, customer records, credentials, API keys, backend endpoints, or map provider keys.
+Atlas Demo Dashboard demonstrates how account representatives can find organizations, review account details, and record notes in one workspace. The application runs in the browser with synthetic data and local demo services.
 
-## Feature Overview
+- Search accounts by name and sort results by name or distance.
+- Filter accounts by region, purchase activity, and suspended status.
+- Review account status, addresses, contacts, and month-to-date and year-to-date revenue.
+- Add account comments and explore locations on an illustrative map.
+- View the demo representative's profile, region, and assigned account count.
+- Switch between light and dark themes and use the dashboard on desktop or mobile.
 
-- Sign in with a local demo account and route through protected dashboard pages.
-- Search fictional accounts by name.
-- Sort accounts by name or calculated distance.
-- Filter account lists by region, recent purchase activity, and suspended account visibility.
-- View account status, address, monthly revenue, yearly revenue, and estimated distance.
-- Open a synthetic account detail card with contact information, revenue badges, notes, call links, and demo-only directions.
-- View account locations on a local demo map with synthetic coordinates.
-- Review a demo user profile with assigned region, hire date, contact details, and assigned account count.
-- Toggle light and dark mode.
+## Technologies Used
 
-## Local Setup
+[![Vue.js](https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D)](https://vuejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![pnpm](https://img.shields.io/badge/pnpm-F69220?style=for-the-badge&logo=pnpm&logoColor=white)](https://pnpm.io/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev/)
+[![Pinia](https://img.shields.io/badge/Pinia-F7D336?style=for-the-badge&logo=pinia&logoColor=black)](https://pinia.vuejs.org/)
+[![Vue Router](https://img.shields.io/badge/Vue%20Router-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D)](https://router.vuejs.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Vitest](https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)](https://vitest.dev/)
 
-The repository includes `pnpm-lock.yaml`, so the commands below assume `pnpm`.
+## Necessary Tools
 
-```bash
-pnpm install
-pnpm dev
-```
+Install these tools before setting up the application. Use Node.js 22 and pnpm 10 as a compatible baseline for these instructions; the repository does not pin their versions.
 
-Vite starts the development server and prints the local URL.
+| Tool                                                            | Purpose                                           |
+| --------------------------------------------------------------- | ------------------------------------------------- |
+| [Git](https://git-scm.com/downloads)                            | Clone the project.                                |
+| [Node.js 22](https://nodejs.org/en/download)                    | Run the application and build tools.              |
+| [pnpm 10](https://pnpm.io/10.x/installation)                    | Install dependencies and run project commands.    |
+| [Visual Studio Code](https://code.visualstudio.com/) (optional) | Explore the source, or use your preferred editor. |
 
-The demo needs no environment secrets. `environment/.example.front-end.env` contains only:
+## Application Setup
 
-```bash
-VITE_DEMO_MODE=true
-```
+The demo requires only the frontend. You do not need a backend, database, environment file, or API keys.
 
-The app currently runs from local synthetic seed data without a real backend.
+### Set Up the Development Environment
 
-## Login
+1. Install Git and Node.js from [Necessary Tools](#necessary-tools), then verify the installations:
 
-Use the built-in demo credentials:
+    ```sh
+    git --version
+    node --version
+    npm --version
+    ```
 
-```text
-Email: demo.manager@example.com
-Password: portfolio-demo
-```
+2. Install pnpm 10 if needed and verify it:
 
-The login flow runs locally. The browser creates a demo token and stores it under the `portfolio_demo_session` local storage key. No real identity provider issues or validates the token.
+    ```sh
+    npm install -g pnpm@10
+    pnpm --version
+    ```
 
-## Scripts
+3. Open a terminal in the folder where you want to keep the project. The commands below work in PowerShell, macOS, and Linux terminals.
 
-```bash
-pnpm dev
-pnpm test
+### Front-end Setup
+
+1. Clone the demo branch and enter its folder. If you already have this checkout, open its folder and skip cloning.
+
+    ```sh
+    git clone --branch clean.apps.front-end https://github.com/austin-mel/csc192-mock-wcp-lookup-tool.git atlas-demo-dashboard
+    cd atlas-demo-dashboard
+    ```
+
+2. Install dependencies:
+
+    ```sh
+    pnpm install
+    ```
+
+3. Start the application:
+
+    ```sh
+    pnpm dev
+    ```
+
+4. Open the local URL Vite prints, usually `http://localhost:5173`, and sign in with the [demo credentials](#demo-credentials). Keep the terminal running; press `Ctrl+C` to stop the server.
+
+### Verify the Setup
+
+From the project folder, run the unit tests once and build the application:
+
+```sh
+pnpm test --run
 pnpm build
-pnpm preview
-pnpm format
 ```
 
-- `pnpm dev` starts the Vite development server.
-- `pnpm test` runs the Vitest test suite.
-- `pnpm build` runs TypeScript checking with `vue-tsc` and creates a production build with Vite.
-- `pnpm preview` serves the built app locally after `pnpm build`.
-- `pnpm format` formats the repository with Prettier.
+After the build succeeds, preview it locally:
 
-## Local Data Architecture
+```sh
+pnpm preview
+```
 
-- `src/data/demo-data.ts` holds the demo user, demo credentials, synthetic account records, geolocation, and notes.
-- `src/services/demo-data.service.ts` provides local mock methods for login, account lookup, comments, and geolocation.
-- `src/services/auth.service.ts`, `src/services/comment.service.ts`, and `src/services/geolocation.service.ts` call the local demo service layer.
-- Vue components and providers under `src/components/Dashboard` manage dashboard state.
-- The account detail card and comment interactions are local demo interactions only.
+Open the preview URL and confirm that you can sign in, search for an account, and open its details. Preview serves the built application locally; it does not publish the demo.
 
-## Glossary
+## Demo credentials
 
-- WCP: Legacy shorthand from the original lookup-tool concept. This public repo does not define or connect to a real WCP platform.
-- Atlas: The public portfolio name for the sanitized dashboard demo.
-- Account: A fictional organization record shown in the dashboard. The code also uses customer and client labels in places inherited from the original app.
-- Customer/client: Alternate labels for the same synthetic account records.
-- Territory/region: A fictional assignment area such as Northwest, Coastal, Southwest, or Central.
-- Sales rep: The fictional representative assigned to a territory or account.
-- Suspended status: A demo account state used to show inactive or paused accounts. It is only sample data.
-- Last purchased: A filter based on synthetic month-to-date and year-to-date sales values.
-- MTD/YTD revenue: Demo month-to-date and year-to-date sales totals.
-- Demo map: A local visualization of synthetic account coordinates. It does not call a map API.
+Use this account on the login page and select **Sign In**.
 
-## Privacy And Sanitization
+| Role    | Demo user     | Email                      | Password         |
+| ------- | ------------- | -------------------------- | ---------------- |
+| Manager | Jordan Rivera | `demo.manager@example.com` | `portfolio-demo` |
 
-All account names, people, addresses, phone numbers, email addresses, sales totals, comments, territory labels, and coordinates are synthetic.
+## Demo walkthrough
 
-The app includes no real client or customer data. It also includes no production credentials, tokens, backend URLs, map keys, screenshots, logos, or operational details. Local mock services provide the demo behavior instead of private API integrations.
+1. **Sign in:** Use the credentials above to open **Dashboard**.
+2. **Find an account:** Enter `Evergreen` in **Search Accounts...**. Clear the search to restore the account list.
+3. **Sort results:** Open **Order By** and choose **Name A→Z**, **Name Z→A**, **Distance A→Z**, or **Distance Z→A**. Distance sorts run from nearest to farthest or farthest to nearest.
+4. **Filter accounts:** Select the filter icon beside the search box. Choose a **Region**, set **Last Purchased**, or enable **Show Suspended Accounts**. Clear region selections and choose **All** under **Last Purchased** to broaden the results.
+5. **Review details:** Close the filters and select an account from the results. Review its status, revenue, address, and available contact details.
+6. **Add a note:** Under **Comments**, enter a note and select **Add Comment**. Close and reopen the account to review it. Reloading the page resets comment changes.
+7. **Explore the map:** Close the account card and select a map marker to open another account. The map displays accounts on the current results page. On mobile, use **Show Map** and **Show Results** to switch views.
+8. **Review the profile:** Select **Profile** to view the demo user's region, hire date, contact details, and assigned account count.
+9. **Change the theme and sign out:** Use the theme toggle in the header, then select **Logout** when finished.
+
+## Development commands
+
+| Task                                             | Command           |
+| ------------------------------------------------ | ----------------- |
+| Start the development server                     | `pnpm dev`        |
+| Run unit tests in watch mode                     | `pnpm test`       |
+| Run unit tests once                              | `pnpm test --run` |
+| Check TypeScript types and build the application | `pnpm build`      |
+| Preview the production build locally             | `pnpm preview`    |
+| Format repository files with Prettier            | `pnpm format`     |
+
+Run `pnpm build` before `pnpm preview`. Formatting rewrites files; use it when preparing source changes.
+
+## Data and privacy
+
+The demo uses synthetic account, contact, sales, and comment data. Local services provide application behavior without a production API, identity provider, or map service.
+
+The browser stores the demo session and theme preference in local storage, so both survive a page reload. **Logout** clears the session. The app keeps comments in memory and restores the original comments when you reload the page. Demo login illustrates the sign-in workflow; it does not provide production authentication.
+
+Distances use a fixed demo location, not your device's position or driving routes. The map illustrates account locations, and **Directions** displays a demo message. The visible **Distance (mi)** slider does not currently filter results; distance sorting remains available through **Order By**.
