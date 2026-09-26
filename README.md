@@ -28,6 +28,9 @@ Atlas Demo Dashboard demonstrates how account representatives can find organizat
 - View the demo representative's profile, region, and assigned account count.
 - Switch between light and dark themes and use the dashboard on desktop or mobile.
 
+_This project has been adapted from my Computer Science Senior Project with real world stakeholder **WCP Solutions**_ 
+_Original project files are protected by NDA and cannot be viewed. All client data and proprietary information has been changed or removed._
+
 ## Technologies Used
 
 [![Vue.js](https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D)](https://vuejs.org/)
